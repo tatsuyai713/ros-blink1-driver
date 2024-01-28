@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>ros_blink1_driver</name>
+  <version>0.0.0</version>
+  <description>Blink (1) ROS 2 Driver</description>
+  <maintainer email="tatsuyai713@gmail.com">Tatsuya Ishikawa</maintainer>
+  <license>MIT License</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>rclcpp</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>libusb-1.0-dev</build_depend>
+
+  <exec_depend>rclcpp</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <export>
+  </export>
+</package>
