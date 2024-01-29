@@ -9,8 +9,12 @@
  */
 
 
-#ifndef __BLINK1_LIB_H__
-#define __BLINK1_LIB_H__
+#ifndef BLINK1_LIB_H
+#define BLINK1_LIB_H
+
+#ifndef USE_HIDAPI
+#define USE_HIDAPI 1
+#endif
 
 #include <stdint.h>
 #include <stdio.h>
