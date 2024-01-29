@@ -40,6 +40,7 @@ endif()
 
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(LIBUSB libusb-1.0 REQUIRED)
+pkg_check_modules(UDEV REQUIRED libudev)
 
 # Include directories for blink1-lib
 target_include_directories(blink1-lib PRIVATE ${LIBUSB_INCLUDE_DIRS} include src/hidapi/hidapi)
@@ -48,15 +49,28 @@ target_include_directories(blink1-lib PRIVATE ${LIBUSB_INCLUDE_DIRS} include src
 add_executable(ros_blink1_driver_node src/ros_blink1_driver.cpp)
 
 # Link blink1-lib to ros_blink1_driver_node
-target_link_libraries(ros_blink1_driver_node blink1-lib)
+target_link_libraries(ros_blink1_driver_node blink1-lib ${UDEV_LIBRARIES} ${LIBUSB_LIBRARIES})
 
 # Include directories for ros_blink1_driver_node
 target_include_directories(ros_blink1_driver_node PRIVATE include ${CMAKE_CURRENT_SOURCE_DIR} ${LIBUSB_INCLUDE_DIRS})
 
 ament_target_dependencies(ros_blink1_driver_node rclcpp std_msgs)
 
+# Install targets
 install(TARGETS
   ros_blink1_driver_node
   DESTINATION lib/${PROJECT_NAME})
+
+# Install launch files
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
+
+# Install scripts
+install(DIRECTORY
+  scripts
+  DESTINATION share/${PROJECT_NAME}/
+)
 
 ament_package()
